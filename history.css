@@ -3,13 +3,20 @@ body {
   background-color: #121212; /* Spotify dark background */
   color: #fff;
   margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto; 
   padding: 20px;
+  text-align: center;
 }
 
 h1 {
   font-size: 1.8em;
-  margin-bottom: 15px;
-  color: #1DB954; /* Spotify green */
+  margin-bottom: 20px;
+  color: #1DB954; 
 }
 
 ul {
@@ -31,4 +38,19 @@ li {
 iframe {
   border: none;
   border-radius: 8px;
+}
+
+.back-btn {
+  margin-top: 25px;
+  padding: 10px 20px;
+  background-color: #1DB954;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background-color: #1aa34a;
 }

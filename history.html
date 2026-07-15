@@ -4,22 +4,68 @@
   <meta charset="UTF-8">
   <title>Recent History</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #1db954, #191414);
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 500px;
+      margin: 0 auto 30px auto;
+    }
+
+    li {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    li:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    #player {
+      margin-top: 20px;
+    }
+
+    iframe {
+      border-radius: 12px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Recent Search History</h1>
+  <h1>🎵 Recent Search History</h1>
   <ul id="historyList"></ul>
 
   <div id="player"></div>
 
   <script>
+    // Retrieve search history from localStorage
     const history = JSON.parse(localStorage.getItem("history")) || [];
     const list = document.getElementById("historyList");
+
+    // Display each search term as a list item
     history.forEach(item => {
       const li = document.createElement("li");
       li.textContent = item;
       list.appendChild(li);
     });
 
+    // Retrieve the last played track ID from localStorage
     const currentTrack = localStorage.getItem("currentTrack");
     if (currentTrack) {
       document.getElementById("player").innerHTML = `

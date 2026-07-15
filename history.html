@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recent History</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Recent Search History</h1>
+  <ul id="historyList"></ul>
+
+  <div id="player"></div>
+
+  <script>
+    const history = JSON.parse(localStorage.getItem("history")) || [];
+    const list = document.getElementById("historyList");
+    history.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.appendChild(li);
+    });
+
+    const currentTrack = localStorage.getItem("currentTrack");
+    if (currentTrack) {
+      document.getElementById("player").innerHTML = `
+        <iframe src="https://open.spotify.com/embed/track/${currentTrack}" 
+          width="300" height="80" frameborder="0" allow="encrypted-media"></iframe>`;
+    }
+  </script>
+</body>
+</html>

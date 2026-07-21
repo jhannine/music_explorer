@@ -32,15 +32,6 @@ A dark-themed, Spotify-inspired web app for discovering songs, viewing lyrics, a
 - lyrics.ovh API (lyrics lookup)
 - Browser `localStorage` for persistence
 
-## Running the Project
-
-The easiest way to run this locally is with the **Live Server** VS Code extension:
-
-1. Install the **Live Server** extension (by Ritwick Dey).
-2. Right-click `index.html` → **"Open with Live Server"**.
-
-You can also just double-click `index.html` to open it directly in your browser — it works the same way since there's no backend server involved.
-
 ## File Structure
 
 ```

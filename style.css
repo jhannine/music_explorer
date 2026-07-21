@@ -5,6 +5,7 @@ body {
   color: #fff;
   margin: 0;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 header {
@@ -35,9 +36,45 @@ button:hover {
   box-shadow: 0 4px 10px rgba(29, 185, 84, 0.4);
 }
 
+.track {
+  background: #282828;
+  padding: 15px;
+  border-radius: 12px;
+  width: 220px;
+  min-height: 120px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.track img {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #282828;
+  padding: 10px;
+  z-index: 10;
+}
+
+#results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 20px auto 80px;
+  align-items: start;
+  
 /* Nav buttons spacing */
 nav button {
   margin-left: 10px;
+
 }
 
 .search-section {
@@ -48,6 +85,14 @@ h2 {
   color: #1DB954;
   margin-top: 30px;
 }
+
+
+.track-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 20px auto 40px;
+  max-width: 900px;
 
 /* Search bar styling */
 #search {
@@ -68,7 +113,7 @@ h2 {
   box-shadow: 0 0 8px rgba(29, 185, 84, 0.7);
 }
 
-/* Results grid - ito yung nagpapaayos para di pahaba/stacked */
+
 #results {
   display: flex;
   flex-wrap: wrap;
@@ -84,15 +129,12 @@ h2 {
   width: 220px;
   cursor: pointer;
   transition: transform 0.2s ease;
+
 }
 
 .track:hover {
-  transform: scale(1.05);
-}
-
-.track img {
-  width: 100%;
-  border-radius: 8px;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
 

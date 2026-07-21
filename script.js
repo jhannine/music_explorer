@@ -3,6 +3,14 @@ const clientSecret = "7a631abba6eb49cfa74a13596287d5e6";
 
 let accessToken = "";
 
+// Show or hide the Suggested Artists section
+function toggleArtistsSection(show) {
+  const section = document.getElementById("topArtists");
+  if (section) {
+    section.style.display = show ? "block" : "none";
+  }
+}
+
 // Get Spotify Token
 async function getToken() {
   try {
@@ -68,6 +76,7 @@ async function searchTrack(query) {
 
     displayTracks(data.tracks.items);
     saveHistory(searchQuery);
+    toggleArtistsSection(false);
     document.getElementById("error").textContent = "";
 
   } catch (error) {
@@ -192,6 +201,43 @@ async function playTrack(trackId, trackName, artistName) {
   }
 }
 
+// Load Suggested Artists (grouped by a few default genres)
+async function loadTopArtists() {
+  const container = document.getElementById("artistsList");
+  container.innerHTML = "";
+
+  const genres = ["pop", "opm", "hiphop"];
+
+  for (const genre of genres) {
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=genre:${genre}&type=artist&limit=3`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch suggested artists");
+
+      const data = await response.json();
+
+      (data.artists?.items || []).forEach(artist => {
+        const div = document.createElement("div");
+        div.className = "track";
+        div.innerHTML = `
+          <h3>${artist.name}</h3>
+          <img src="${artist.images[0]?.url || ''}" alt="Artist">
+        `;
+        container.appendChild(div);
+      });
+    } catch (error) {
+      console.error("Artist Suggestion Error:", error);
+    }
+  }
+}
+
 // Save search history in localStorage (used by history.html only)
 function saveHistory(query) {
   let history = JSON.parse(localStorage.getItem("history")) || [];
@@ -209,7 +255,10 @@ function addToPlaylist(song) {
 
 
 // Init
-getToken();
+(async () => {
+  await getToken();
+  await loadTopArtists();
+})();
 
 // Note: search results and the player are intentionally NOT restored on
 // page load/refresh. Everything resets to a blank state, as intended.
